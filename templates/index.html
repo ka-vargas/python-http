@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Python & HTTP</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Python & HTTP</h1>
+        
+    </header>
+
+    <main>
+
+        <!-- SECCIÓN DE EJERCICIOS -->
+        <section class="ejercicios">
+
+            <h2>Ejercicios</h2>
+
+            <!-- EJERCICIO 1 -->
+            <details class="ejercicio" name="grupo-ejercicios"
+                {% if ejercicio_activo == 1 %}open{% endif %}>
+
+                <summary> 1. Comprobar palíndromo</summary>
+
+                <div class="contenido-ejercicio">
+
+                    <form method="POST" action="/">
+
+                        <label for="palabra">Introduce una palabra o frase:</label>
+
+                        <input
+                            type="text"
+                            id="palabra"
+                            name="palabra"
+                            value="{{ palabra }}"
+                            placeholder="Escribe aquí..."
+                        >
+
+                        <button type="submit">Comprobar</button>
+
+                    </form>
+
+                    {% if resultado %}
+                        <p class="resultado">{{ resultado }}</p>
+                    {% endif %}
+
+                </div>
+
+            </details>
+
+
+            <!-- EJERCICIO 2 -->
+            <details class="ejercicio" name="grupo-ejercicios"
+                {% if ejercicio_activo == 2 %}open{% endif %}>
+
+                <summary> 2. Comparar dos números</summary>
+
+                <div class="contenido-ejercicio">
+
+                    <form method="POST" action="/">
+
+                        <label for="numero1">Primer número:</label>
+
+                        <input
+                            type="number"
+                            id="numero1"
+                            name="numero1"
+                            step="any"
+                            required
+                        >
+
+                        <label for="numero2">Segundo número:</label>
+
+                        <input
+                            type="number"
+                            id="numero2"
+                            name="numero2"
+                            step="any"
+                            required
+                        >
+
+                        <button type="submit">Comparar</button>
+
+                    </form>
+
+                    {% if resultado_comparacion %}
+                        <p class="resultado">
+                            {{ resultado_comparacion }}
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </details>
+
+
+            <!-- EJERCICIO 3 -->
+            <details class="ejercicio" name="grupo-ejercicios"
+                {% if ejercicio_activo == 3 %}open{% endif %}>
+
+                <summary> 3. Identificar las vocales</summary>
+
+                <div class="contenido-ejercicio">
+
+                    <form method="POST" action="/">
+
+                        <label for="frase_vocales">Introduce una frase:</label>
+
+                        <input
+                            type="text"
+                            id="frase_vocales"
+                            name="frase_vocales"
+                            value="{{ frase_vocales }}"
+                            placeholder="Escribe una frase..."
+                        >
+
+                        <button type="submit">Mostrar vocales</button>
+
+                    </form>
+
+                    {% if resultado_vocales %}
+                        <p class="resultado">
+                            Vocales encontradas: {{ resultado_vocales }}
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </details>
+
+
+            <!-- EJERCICIO 4 -->
+            <details class="ejercicio" name="grupo-ejercicios"
+                {% if ejercicio_activo == 4 %}open{% endif %}>
+
+                <summary> 4. Contar las vocales</summary>
+
+                <div class="contenido-ejercicio">
+
+                    <form method="POST" action="/">
+
+                        <label for="frase_conteo">Introduce una frase:</label>
+
+                        <input
+                            type="text"
+                            id="frase_conteo"
+                            name="frase_conteo"
+                            value="{{ frase_conteo }}"
+                            placeholder="Escribe una frase..."
+                        >
+
+                        <button type="submit">Contar vocales</button>
+
+                    </form>
+
+                    {% if resultado_conteo is mapping %}
+
+                        <div class="resultado">
+
+                            <h3>Resultado del conteo</h3>
+
+                            {% for vocal, cantidad in resultado_conteo.items() %}
+                                <p>
+                                    {{ vocal }}: {{ cantidad }}
+                                </p>
+                            {% endfor %}
+
+                        </div>
+
+                    {% elif resultado_conteo %}
+                        <p class="resultado">
+                            {{ resultado_conteo }}
+                        </p>
+                    {% endif %}
+
+                </div>
+
+            </details>
+
+        </section>
+
+
+        <!-- SECCIÓN DE EXPLORADOR HTTP -->
+        <details class="explorador" name="grupo-ejercicios"
+            {% if respuesta_http %}open{% endif %}>
+
+            <summary>Explorador HTTP</summary>
+
+            <p>
+                Herramienta para realizar solicitudes HTTP
+                y analizar las respuestas del servidor.
+            </p>
+
+            <div class="contenido-http">
+
+                <h3>Consulta de URL</h3>
+
+                <form method="POST" action="/explorador">
+
+                    <label for="url">Dirección URL:</label>
+
+                    <input
+                        type="url"
+                        id="url"
+                        name="url"
+                        value="{{ url or request.url_root }}"
+                        placeholder="https://www.ejemplo.com"
+                        required
+                    >
+
+                    <button type="submit">Mostrar contenidos</button>
+
+                </form>
+
+
+                {% if respuesta_http %}
+
+                    <div class="resultado-http">
+
+                        <!-- ESTADO DE LA PETICIÓN -->
+                        <h3>Estado de la petición</h3>
+
+                        <p>
+                            {{ respuesta_http.estado_peticion }}
+                        </p>
+
+
+                        <!-- CÓDIGO DE ESTADO -->
+                        <h3>Código de estado</h3>
+
+                        {% if respuesta_http.codigo %}
+                            <p>
+                                {{ respuesta_http.codigo }}
+                                {{ respuesta_http.estado }}
+                            </p>
+                        {% endif %}
+
+
+                        <!-- CONTENIDO DE LA RESPUESTA -->
+                        <h3>Contenido de la respuesta</h3>
+
+                        {% if respuesta_http.contenido is defined %}
+                            <pre>{{ respuesta_http.contenido }}</pre>
+                        {% endif %}
+
+
+                        <!-- CABECERAS HTTP -->
+                        <h3>Cabeceras HTTP de la respuesta</h3>
+
+                        {% if respuesta_http.cabeceras %}
+
+                            <pre>{% for nombre, valor in respuesta_http.cabeceras.items() %}{{ nombre }}: {{ valor }}
+                            {% endfor %}</pre>
+
+                        {% endif %}
+
+
+                        <!-- MENSAJE DE ERROR -->
+                        {% if respuesta_http.error %}
+                            <p class="resultado">
+                                {{ respuesta_http.error }}
+                            </p>
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </details>
+
+    </main>
+
+</body>
+</html>

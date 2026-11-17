@@ -1,0 +1,255 @@
+
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #263238;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   ENCABEZADO
+========================================== */
+
+h1 {
+    background-color: #243447;
+    color: #ffffff;
+    padding: 25px 40px;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+
+/* DESCRIPCIÓN */
+
+body > p {
+    background-color: #ffffff;
+    padding: 15px 40px;
+    color: #687586;
+    border-bottom: 1px solid #e5e9ef;
+}
+
+
+/* ==========================================
+   CONTENIDO PRINCIPAL
+========================================== */
+
+main {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 25px;
+}
+
+
+/* ==========================================
+   SECCIONES
+========================================== */
+
+section {
+    background-color: #ffffff;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #e3e8ef;
+    border-radius: 6px;
+}
+
+
+/* TÍTULOS */
+
+section h2 {
+    color: #243447;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+section h3 {
+    color: #34495e;
+    font-size: 16px;
+    margin-top: 22px;
+    margin-bottom: 10px;
+}
+
+
+/* ==========================================
+   FORMULARIOS
+========================================== */
+
+section form,
+.explorador form {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+section input,
+.explorador input {
+    flex: 1;
+    padding: 11px 14px;
+    border: 1px solid #d5dce5;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+section button,
+.explorador button {
+    background-color: #243447;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 11px 22px;
+    cursor: pointer;
+}
+
+section button:hover,
+.explorador button:hover {
+    background-color: #344e68;
+}
+
+
+/* RESULTADOS */
+
+.resultado {
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #edf3f8;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   TARJETA PRINCIPAL DE EJERCICIOS
+========================================== */
+
+.ejercicios {
+    background-color: #ffffff;
+    padding: 25px;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+}
+
+
+/* TARJETAS INDIVIDUALES */
+
+.ejercicios .ejercicio {
+    background-color: #ffffff;
+    border: 1px solid #dfe5ed;
+    border-radius: 8px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   ENCABEZADOS DE LOS ACORDEONES
+========================================== */
+
+.ejercicio summary,
+.explorador summary {
+    padding: 22px;
+    cursor: pointer;
+    color: #243447;
+    font-size: 18px;
+    font-weight: 600;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ejercicio summary::-webkit-details-marker,
+.explorador summary::-webkit-details-marker {
+    display: none;
+}
+
+
+/* SÍMBOLO DE APERTURA */
+
+.ejercicio summary::after,
+.explorador summary::after {
+    content: "+";
+    font-size: 22px;
+    color: #687586;
+    line-height: 1;
+}
+
+.ejercicio[open] summary::after,
+.explorador[open] summary::after {
+    content: "−";
+}
+
+
+/* ==========================================
+   CONTENIDO DESPLEGADO DE LOS EJERCICIOS
+========================================== */
+
+.ejercicios .contenido-ejercicio {
+    padding: 22px;
+    border-top: 1px solid #e3e8ef;
+}
+
+.ejercicios .contenido-ejercicio p {
+    margin-bottom: 15px;
+}
+
+
+/* ==========================================
+   ACORDEÓN DE EXPLORACIÓN HTTP
+========================================== */
+
+.explorador {
+    display: block;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #dfe5ed;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+/* DESCRIPCIÓN */
+
+.explorador > p {
+    padding: 0 22px;
+    color: #687586;
+}
+
+
+/* CONTENIDO HTTP */
+
+.explorador .contenido-http {
+    padding: 22px;
+}
+
+
+/* RESULTADO DE LA CONSULTA */
+
+.explorador .resultado-http {
+    margin-top: 20px;
+}
+
+
+/* CONTENIDO Y CABECERAS DE LA RESPUESTA */
+
+.explorador .resultado-http pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #f1f5f9;
+    border-radius: 8px;
+}
