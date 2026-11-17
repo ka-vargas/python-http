@@ -93,7 +93,7 @@ def consultar_url(url):
             headers={'User-Agent': 'Python-HTTP-Laboratorio'}
         )
 
-        with urlopen(solicitud, timeout=10) as respuesta:
+        with urlopen(solicitud, timeout=30) as respuesta:
 
             contenido = respuesta.read(1000000).decode(
                 respuesta.headers.get_content_charset() or 'utf-8',
